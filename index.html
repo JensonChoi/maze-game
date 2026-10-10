@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10120f" />
+    <meta name="description" content="Twenty mazes. One way forward. Explore a new collection of solvable 3D mazes, from an easy first step to a final challenge." />
+    <title>After Hours — Maze Club</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a href="#" class="brand" id="brand-home" aria-label="After Hours Maze Club home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M14 3H3v26h26V3h-9v19h-9V11h3M20 29v-7M3 19h8" /></svg>
+          <span>AFTER HOURS<span class="brand-sub">MAZE CLUB</span></span>
+        </a>
+        <span class="header-note"><i class="status-dot"></i> A LITTLE LOST. A LITTLE FOUND.</span>
+        <button class="quiet-button reset-button" id="reset-open"><span aria-hidden="true">↺</span> Reset progress</button>
+      </header>
+
+      <main>
+        <p id="storage-warning" class="notice" role="status" hidden>Progress can’t be saved in this browser. You can still play, but progress will be lost when this page closes.</p>
+        <section id="home" aria-labelledby="home-title">
+          <div class="hero">
+            <div class="hero-copy">
+              <p class="eyebrow"><span class="tiny-line"></span> TAKE THE LONG WAY HOME</p>
+              <h1 id="home-title">FIND<br />YOUR <span>WAY.</span></h1>
+              <p class="intro">Twenty mazes. One way forward.<br />Start small, get lost, and find your way through.</p>
+              <button class="primary" id="continue"><span id="continue-label">Enter the maze</span><span aria-hidden="true">↗</span></button>
+              <div class="hero-caption"><span>RANDOMLY GENERATED</span><i></i><span>ALWAYS SOLVABLE</span></div>
+            </div>
+            <div class="hero-visual">
+              <div class="visual-topline"><span><span class="lime">✳</span> YOUR NEXT CHALLENGE</span><span id="preview-level">LEVEL 01 / 20</span></div>
+              <div id="home-stage" class="home-stage"></div>
+              <div class="visual-bottomline"><span><i class="legend-player"></i> YOU</span><span><i class="legend-exit"></i> THE WAY OUT</span><span>ONE STEP AT A TIME ↗</span></div>
+            </div>
+          </div>
+
+          <section class="levels-section" aria-labelledby="levels-title">
+            <div class="section-heading">
+              <div><p class="eyebrow">THE COLLECTION</p><h2 id="levels-title">Every turn is a new beginning.</h2></div>
+              <div class="progress-summary"><span><strong id="completed-count">00</strong> / 20 COMPLETE</span><div class="progress-track" role="progressbar" aria-label="Levels completed" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><div id="progress-fill"></div></div></div>
+            </div>
+            <div class="level-grid" id="level-grid"></div>
+            <p class="unlock-note"><span aria-hidden="true">↳</span> Find the exit to unlock the next maze. Your progress is saved automatically.</p>
+          </section>
+          <div class="how-to"><span class="eyebrow">FIND YOUR FEET</span><p><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> <span>or</span> <strong>W A S D</strong> <span>to move</span></p><p>Follow your curiosity. Reach the <span class="lime">ring</span>.</p><p>On mobile? Use the on-screen controls.</p></div>
+        </section>
+
+        <section id="game" aria-labelledby="game-title" hidden>
+          <div class="game-heading"><button class="quiet-button" id="back-home">← All levels</button><span class="eyebrow" id="game-difficulty"></span><button class="quiet-button" id="restart">↺ Restart maze</button></div>
+          <div class="game-title-row"><div><p class="eyebrow" id="game-level"></p><h1 id="game-title" tabindex="-1"></h1></div><div class="move-counter"><span class="eyebrow">MOVES</span><strong id="moves">000</strong></div></div>
+          <div class="play-layout">
+            <div id="game-stage" class="game-stage" tabindex="0" role="group" aria-label="Maze board. Use arrow keys or W A S D to reach the exit ring."></div>
+            <aside class="play-guide"><span class="eyebrow">A WAY THROUGH</span><h2>Trust<br />the turns.</h2><p>Move the lime marker to the exit ring. Each maze has a way through.</p><div class="game-legend"><span><i class="legend-player"></i> Your position</span><span><i class="legend-exit"></i> The exit</span><span><i class="legend-trail"></i> Where you’ve been</span></div><div class="d-pad" aria-label="Movement controls"><button data-direction="0" aria-label="Move up">↑</button><button data-direction="3" aria-label="Move left">←</button><span aria-hidden="true">✳</span><button data-direction="1" aria-label="Move right">→</button><button data-direction="2" aria-label="Move down">↓</button></div><p class="controls-note">ARROW KEYS / WASD / TOUCH</p><p class="no-rush">No clock. No rush.<br />Just you and the next turn.</p></aside>
+          </div>
+          <p id="move-status" class="sr-only" aria-live="polite"></p>
+        </section>
+      </main>
+      <footer><span>AFTER HOURS <span class="footer-slash">/</span> MADE FOR GETTING A LITTLE LOST.</span><span>20 LEVELS. ENDLESS POSSIBILITIES. <span class="lime">↗</span></span></footer>
+    </div>
+
+    <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+      <form method="dialog" class="dialog-card"><span class="dialog-symbol" aria-hidden="true">↺</span><p class="eyebrow">A FRESH START</p><h2 id="reset-title">Back to the beginning?</h2><p id="reset-description">This will clear all completed levels and generate 20 new mazes. Only level 1 will be unlocked. This can’t be undone.</p><div class="dialog-actions"><button class="secondary" value="cancel" autofocus>Keep my progress</button><button class="primary" id="reset-confirm" value="reset">Reset progress <span aria-hidden="true">↗</span></button></div></form>
+    </dialog>
+    <dialog id="win-dialog" aria-labelledby="win-title" aria-describedby="win-description">
+      <div class="dialog-card"><span class="dialog-symbol" aria-hidden="true">✳</span><p class="eyebrow" id="win-eyebrow">ONE STEP FURTHER</p><h2 id="win-title">You found your way.</h2><p id="win-description"></p><div class="dialog-actions"><button class="primary" id="next-level">Next maze <span aria-hidden="true">↗</span></button><button class="secondary" id="win-home">Back to all levels</button></div></div>
+    </dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
